@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartModal } from "../../components/CartModal";
 import { Header } from "../../components/Header";
 import { ProductList } from "../../components/ProductList";
+import { HomeStyle } from "./style";
+import axios from "axios";
 
 export const HomePage = () => {
    const [productList, setProductList] = useState([]);
    const [cartList, setCartList] = useState([]);
+
+   useEffect(() => {
+      axios.get("https://hamburgueria-kenzie-json-serve.herokuapp.com/products")
+         .then((result) => {
+            setProductList(result.data)
+         })
+   }, [])
 
    // useEffect montagem - carrega os produtos da API e joga em productList
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
@@ -17,10 +26,10 @@ export const HomePage = () => {
    return (
       <>
          <Header />
-         <main>
+         <HomeStyle>
             <ProductList productList={productList} />
             <CartModal cartList={cartList} />
-         </main>
+         </HomeStyle>
       </>
    );
 };

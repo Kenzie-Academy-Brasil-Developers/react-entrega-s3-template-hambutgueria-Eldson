@@ -1,19 +1,20 @@
 import { useState } from "react";
 import Logo from "../../assets/Logo.svg";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
+import { HeaderStyle } from "./style";
 
 export const Header = () => {
    const [value, setValue] = useState("");
 
    return (
-      <header>
+      <HeaderStyle>
          <img src={Logo} alt="Logo Kenzie Burguer" />
          <div>
-            <button>
-                <MdShoppingCart size={21} />
+            <button className="card_button">
+                <MdShoppingCart size={30} color="#BDBDBD" />
                 <span>0</span>
             </button>
-            <form>
+            {/* <form>
                <input
                   type="text"
                   value={value}
@@ -22,8 +23,8 @@ export const Header = () => {
                <button type="submit">
                  <MdSearch size={21} />
                </button>
-            </form>
+            </form> */}
          </div>
-      </header>
+      </HeaderStyle>
    );
 };
