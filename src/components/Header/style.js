@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const HeaderStyle = styled.header `
-    padding: 0px 118px;
-    width: calc(100vw - 236px);
+    margin: 0 auto;
+    padding: 0 118px;
+    width: calc(100% - 236px);
     height: 80px;
 
     display: flex;
@@ -27,5 +28,12 @@ export const HeaderStyle = styled.header `
             font-size: 14px;
             font-weight: 700;
         }
+
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 560px) {
+        padding: 0 10px;
+        width: calc(100vw - 20px) ;
     }
 `;

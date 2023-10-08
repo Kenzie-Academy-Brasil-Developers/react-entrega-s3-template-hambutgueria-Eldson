@@ -15,6 +15,10 @@ export const CartModalStyle = styled.dialog `
 
     .container_dialog {
         width: 484px;
+        height: auto;
+        max-height: 450px;
+
+        /* overflow-y: scroll; */
         background-color: #fff;
         border-radius: 8px;
 
@@ -23,6 +27,8 @@ export const CartModalStyle = styled.dialog `
 
             width: calc(100% - 28px);
             height: 57px;
+
+            position: static;
 
             display: flex;
             justify-content: space-between;
@@ -37,6 +43,48 @@ export const CartModalStyle = styled.dialog `
 
             button {
                 background-color: transparent;
+                cursor: pointer;
+            }
+        }
+
+        .body_dialog {
+            padding: 14px;
+            max-height: 200px;
+            overflow-y: scroll;
+
+            
+            ul {
+                border-bottom: 2px solid var(--grey-100);
+                padding-bottom: 14px;
+            }
+        }
+
+        .total_price_container {
+            padding: 14px;
+
+            .header_total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .title {
+                    color: var(--grey-600);
+                }
+
+                .price {
+                    color: var(--grey-300);
+                }
+            }
+
+            button {
+                margin-top: 30px;
+                width: 100%;
+                height: 60px;
+
+                background-color: var(--grey-400);
+                border-radius: 8px;
+                color: #fff;
+
                 cursor: pointer;
             }
         }

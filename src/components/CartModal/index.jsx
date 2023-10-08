@@ -1,11 +1,23 @@
 import { MdClose } from "react-icons/md";
 import { CartItemCard } from "./CartItemCard";
 import { CartModalStyle } from "./style";
+import { useEffect, useState } from "react";
 
-export const CartModal = ({ cartList }) => {
-   const total = cartList.reduce((prevValue, product) => {
+export const CartModal = () => {
+   const [ arrayList, setArrayList ] = useState([])
+   const total = arrayList.reduce((prevValue, product) => {
       return prevValue + product.price;
    }, 0);
+
+   useEffect(() => {
+      const itemsArray = JSON.parse(localStorage.getItem("cartArray") || "[]")
+      setArrayList(itemsArray)
+   }, [])
+
+   const clearItems = () => {
+      localStorage.clear("cartArray")
+      setArrayList([])
+   }
 
    return (
       <CartModalStyle>
@@ -16,21 +28,21 @@ export const CartModal = ({ cartList }) => {
                   <MdClose size={21} color="#FFFFFF80"/>
                </button>
             </div>
-            <div>
+            <div className="body_dialog">
                <ul>
-                  {cartList.map((product) => (
+                  {arrayList.map((product) => (
                      <CartItemCard key={product.id} product={product} />
                   ))}
                </ul>
             </div>
-            <div>
-               <div>
-                  <span>Total</span>
-                  <span>{total.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})}</span>
+            <div className="total_price_container">
+               <div className="header_total">
+                  <span className="headline title">Total</span>
+                  <span className="body price">{total.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})}</span>
                </div>
-               <button>Remover todos</button>
+               <button onClick={clearItems} className="body">Remover todos</button>
             </div>
          </div>
-      </CartModalStyle>
+      </CartModalStyle> 
    );
 };

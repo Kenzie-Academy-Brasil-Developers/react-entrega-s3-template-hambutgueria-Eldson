@@ -6,29 +6,31 @@ import { HomeStyle } from "./style";
 import axios from "axios";
 
 export const HomePage = () => {
-   const [productList, setProductList] = useState([]);
-   const [cartList, setCartList] = useState([]);
-
+   const [ productList, setProductList ] = useState([]);
+   const [ cartList, setCartList ] = useState([]);
+   const [ stateModal,setStateModal ] = useState(false);
+   
    useEffect(() => {
       axios.get("https://hamburgueria-kenzie-json-serve.herokuapp.com/products")
          .then((result) => {
             setProductList(result.data)
          })
    }, [])
+   
+   const receiveData = (data) => {
+      setCartList(data)
+   }
 
-   // useEffect montagem - carrega os produtos da API e joga em productList
-   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
-   // adição, exclusão, e exclusão geral do carrinho
-   // renderizações condições e o estado para exibir ou não o carrinho
-   // filtro de busca
-   // estilizar tudo com sass de forma responsiva
+   const receiveState = (data) => {
+      setStateModal(data)
+   }
 
    return (
       <>
-         <Header />
+         <Header cartItems={cartList} modalState={receiveState}/>
          <HomeStyle>
-            <ProductList productList={productList} />
-            <CartModal cartList={cartList} />
+            <ProductList productList={productList} cartItems={receiveData}/>
+            {stateModal ? <CartModal/> : false}
          </HomeStyle>
       </>
    );

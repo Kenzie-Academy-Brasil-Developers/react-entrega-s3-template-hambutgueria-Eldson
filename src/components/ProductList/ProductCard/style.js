@@ -2,12 +2,20 @@ import styled from "styled-components";
 
 export const ProductCardStyle = styled.li `
     width: 300px;
+    min-width: 300px;
     border-radius: 7px;
     border: 2px solid var(--grey-100);
 
-    &:focus {
+    &.focus {
         border-color: var(--color-primary);
         transition: .5s;
+
+        .container_info {
+            button {
+                background-color: var(--color-primary);
+                transition: .5s;
+            }
+        }
     }
 
     .container_image {
@@ -18,7 +26,6 @@ export const ProductCardStyle = styled.li `
 
         display: flex;
         justify-content: center;
-        align-items: center;
 
         background-color: var(--grey-0);
     }
