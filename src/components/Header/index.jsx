@@ -15,7 +15,6 @@ export const Header = ({cartItems, modalState}) => {
       modalState(true)
    }
 
-
    return (
       <HeaderStyle>
          <img src={Logo} alt="Logo Kenzie Burguer" />
@@ -24,16 +23,6 @@ export const Header = ({cartItems, modalState}) => {
                 <MdShoppingCart size={30} color="#BDBDBD" />
                 <span>{cartItems.length == 0 ? cartList.length : cartItems.length}</span>
             </button>
-            {/* <form>
-               <input
-                  type="text"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-               />
-               <button type="submit">
-                 <MdSearch size={21} />
-               </button>
-            </form> */}
          </div>
       </HeaderStyle>
    );

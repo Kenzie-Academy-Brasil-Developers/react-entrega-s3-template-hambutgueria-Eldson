@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { ProductCardStyle } from "./style"
-import { toast } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ProductCard = ({ product, cartArray }) => {
     const [ isFocused, setIsFocused ] = useState(false)
@@ -25,9 +26,9 @@ export const ProductCard = ({ product, cartArray }) => {
     
             cartArray(updatedArray)
             setIsFocused(true)
+            toast.success("Adicionado com sucesso")
         } else {
-            toast.error("Item ja adicionado!")
-            console.log("Ja adicionado!")
+            toast.error("Item já adicionado!")
         }
     }
 
@@ -42,6 +43,7 @@ export const ProductCard = ({ product, cartArray }) => {
                 <span className="body color-span-body">{product.price.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})}</span>
                 <button onClick={() => addItemToCart(product.name)}>Adicionar</button>
             </div>
+            <ToastContainer />
         </ProductCardStyle>
     )
 }

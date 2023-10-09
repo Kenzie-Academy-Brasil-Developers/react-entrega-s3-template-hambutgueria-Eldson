@@ -1,8 +1,19 @@
 import { MdDelete } from "react-icons/md";
 import { CartItemCardStyle } from "./style";
+import { useEffect, useState } from "react";
 
-export const CartItemCard = ({ product }) => {
-   
+export const CartItemCard = ({ product, index, removeItem}) => {
+   const [ arrayItems, setArrayItems ] = useState([])
+
+   useEffect(() => {
+      const cartItems = JSON.parse(localStorage.getItem("cartArray") || "[]")
+      setArrayItems(cartItems)
+   }, [])
+
+   const handleRemoveClick = () => {
+      removeItem(index)
+   }
+
    return (
       <CartItemCardStyle>
          <div className="left_container">
@@ -14,7 +25,7 @@ export const CartItemCard = ({ product }) => {
                <p className="body">{product.price.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})}</p>
             </div>
          </div>
-         <button aria-label="delete" title="Remover item">
+         <button onClick={handleRemoveClick} aria-label="delete" title="Remover item">
             <MdDelete size={21} color="#BDBDBD"/>
          </button>
       </CartItemCardStyle>

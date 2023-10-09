@@ -3,7 +3,7 @@ import { CartItemCard } from "./CartItemCard";
 import { CartModalStyle } from "./style";
 import { useEffect, useState } from "react";
 
-export const CartModal = () => {
+export const CartModal = ({modalStateHide}) => {
    const [ arrayList, setArrayList ] = useState([])
    const total = arrayList.reduce((prevValue, product) => {
       return prevValue + product.price;
@@ -19,19 +19,35 @@ export const CartModal = () => {
       setArrayList([])
    }
 
+   const hideModalState = () => {
+      modalStateHide(false)
+   }
+
+   const deleteItem = (index) => {
+      const updatedItems = [...arrayList]
+      updatedItems.splice(index, 1)
+      setArrayList(updatedItems)
+      localStorage.setItem("cartArray", JSON.stringify(updatedItems))
+   }
+
    return (
       <CartModalStyle>
          <div role="dialog" className="container_dialog">
             <div className="header_dialog">
                <h2 className="heading3">Carrinho de compras</h2>
-               <button aria-label="close" title="Fechar">
+               <button onClick={hideModalState} aria-label="close" title="Fechar">
                   <MdClose size={21} color="#FFFFFF80"/>
                </button>
             </div>
             <div className="body_dialog">
                <ul>
-                  {arrayList.map((product) => (
-                     <CartItemCard key={product.id} product={product} />
+                  {arrayList.map((product, index) => (
+                     <CartItemCard 
+                        key={product.id} 
+                        index={index} 
+                        product={product} 
+                        removeItem={deleteItem}
+                     />
                   ))}
                </ul>
             </div>

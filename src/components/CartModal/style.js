@@ -15,6 +15,7 @@ export const CartModalStyle = styled.dialog `
 
     .container_dialog {
         width: 484px;
+        max-width: 95%;
         height: auto;
         max-height: 450px;
 
